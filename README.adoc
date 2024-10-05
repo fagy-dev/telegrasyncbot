@@ -1,3 +1,5 @@
 = telegrasyncbot
+
 A modern framework for building https://core.telegram.org/bots[Telegram bots] with https://deno.com/[Deno].
+
 Built on top of the https://core.telegram.org/bots/api[Telegram Bot API]
