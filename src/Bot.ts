@@ -3,6 +3,7 @@ import { User } from "./types/User.ts";
 
 export class Bot {
     private readonly url: string
+    private handlers: ((update: Update, bot: Bot) => unknown)[] = []
 
     constructor(token: string) {
         this.url = `https://api.telegram.org/bot${token}`
@@ -13,8 +14,6 @@ export class Bot {
 
         if (params) {
             const queryParams = new URLSearchParams(params).toString()
-
-            console.log(queryParams)
             input += `?${queryParams}`
         }
 
@@ -39,5 +38,25 @@ export class Bot {
 
     public async getMe(): Promise<User> {
         return await this.callTelegramAPI('getMe')
+    }
+
+    public addHandler(handler: (update: Update, bot: Bot) => Promise<unknown>) {
+        this.handlers.push(handler)
+    }
+
+    public polling(params?:{ offset?: number, limit?: number, timeout?: number, allowedUpdates?: UpdateType[] } = {timeout: 10}) {
+        this.getUpdates(params).then(
+            (updates) => {
+                let update_id
+                for (const update of updates) {
+                    if (!update_id) update_id = update.update_id
+                    else if (update.update_id > update_id) update_id = update.update_id
+                    this.handlers.forEach(handler => handler(update, this))
+                }
+                if (params) params.offset = update_id ? update_id + 1 : undefined
+                console.log()
+                this.polling(params)
+            }
+        )
     }
 }
