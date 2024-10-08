@@ -65,3 +65,5 @@ export type InaccessibleMessage = {
     message_id: number
     date: 0
 }
+
+export type MaybeInaccessibleMessage = Message | InaccessibleMessage
