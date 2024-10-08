@@ -44,7 +44,7 @@ export class Bot {
         this.handlers.push(handler)
     }
 
-    public polling(params?:{ offset?: number, limit?: number, timeout?: number, allowedUpdates?: UpdateType[] } = {timeout: 10}) {
+    public polling(params:{ offset?: number, limit?: number, timeout?: number, allowedUpdates?: UpdateType[] } = {timeout: 10}) {
         this.getUpdates(params).then(
             (updates) => {
                 let update_id
