@@ -77,3 +77,10 @@ export type MessageEntity = {
   language?: string
   custom_emoji_id?: string
 }
+
+export type TextQuote = {
+  text: string
+  entities?: MessageEntity[]
+  position: number
+  is_manual?: true
+}
