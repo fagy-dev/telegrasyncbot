@@ -67,3 +67,13 @@ export type InaccessibleMessage = {
 };
 
 export type MaybeInaccessibleMessage = Message | InaccessibleMessage;
+
+export type MessageEntity = {
+  type: 'mention' | 'hashtag' | 'cashtag' | 'bot_command' | 'url' | 'email' | 'phone_number' | 'bold' | 'italic' | 'underline' | 'strikethrough' | 'spoiler' | 'blockquote' | 'expandable_blockquote' | 'code' | 'pre' | 'text_link' | 'text_mention' | 'custom_emoji'
+  offset: number
+  length: number
+  url?: string
+  user?: User
+  language?: string
+  custom_emoji_id?: string
+}
