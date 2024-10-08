@@ -1,7 +1,7 @@
 import { Chat } from "./Chat.ts";
 import { User } from "./User.ts";
 
-export type ParseMode = 'Markdown' | 'HTML' | 'MarkdownV2'
+export type ParseMode = "Markdown" | "HTML" | "MarkdownV2";
 
 export type Message = {
   message_id: number;

@@ -15,22 +15,22 @@ export class Bot {
     params?: Record<string, any>,
   ) {
     const requestInit: RequestInit = {
-      method: 'POST'
-    }
+      method: "POST",
+    };
 
     if (params) {
-      const urlParams: Record<string, string> = {}
-      
+      const urlParams: Record<string, string> = {};
+
       for (const [key, value] of Object.entries(params)) {
-        if (typeof value === 'string') {
-          urlParams[key] = value
-          continue
+        if (typeof value === "string") {
+          urlParams[key] = value;
+          continue;
         }
-        if (typeof value === 'boolean' || typeof value === 'number') {
-          urlParams[key] = value.toString()
-          continue
+        if (typeof value === "boolean" || typeof value === "number") {
+          urlParams[key] = value.toString();
+          continue;
         }
-        urlParams[key] = JSON.stringify(value)
+        urlParams[key] = JSON.stringify(value);
       }
 
       requestInit.body = new URLSearchParams(urlParams);
@@ -85,7 +85,7 @@ export class Bot {
   // deleteWebhook
   // getWebhookInfo
 
-  // Available methods  
+  // Available methods
 
   public async getMe(): Promise<User> {
     return await this.callTelegramAPI("getMe");
@@ -95,41 +95,42 @@ export class Bot {
   // close
 
   public async sendMessage(params: {
-    business_connection_id?: string
-    chat_id: number | string
-    message_thread_id?: number
-    text: string
-    parse_mode?: ParseMode
-    entities?: MessageEntity[]
-    link_preview_options?: any /*LinkPreviewOptions*/
-    disable_notification?: boolean
-    protect_content?: boolean
-    message_effect_id?: string
-    reply_parameters?: any /*ReplyParameters*/
-    reply_markup?: any /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
+    business_connection_id?: string;
+    chat_id: number | string;
+    message_thread_id?: number;
+    text: string;
+    parse_mode?: ParseMode;
+    entities?: MessageEntity[];
+    link_preview_options?: any; /*LinkPreviewOptions*/
+    disable_notification?: boolean;
+    protect_content?: boolean;
+    message_effect_id?: string;
+    reply_parameters?: any; /*ReplyParameters*/
+    reply_markup?:
+      any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }): Promise<Message> {
-    return await this.callTelegramAPI('sendMessage', params)
+    return await this.callTelegramAPI("sendMessage", params);
   }
 
   public async forwardMessage(params: {
-    chat_id: number | string
-    message_thread_id?: number
-    from_chat_id: number | string
-    disable_notification?: boolean
-    protect_content?: boolean
-    message_id: number
+    chat_id: number | string;
+    message_thread_id?: number;
+    from_chat_id: number | string;
+    disable_notification?: boolean;
+    protect_content?: boolean;
+    message_id: number;
   }): Promise<Message> {
-    return await this.callTelegramAPI('forwardMessage', params)
+    return await this.callTelegramAPI("forwardMessage", params);
   }
 
   public async forwardMessages(params: {
-    chat_id: number | string
-    message_thread_id?: number
-    from_chat_id: number | string
-    message_ids: number[]
-    disable_notification?: boolean
-    protect_content?: boolean
+    chat_id: number | string;
+    message_thread_id?: number;
+    from_chat_id: number | string;
+    message_ids: number[];
+    disable_notification?: boolean;
+    protect_content?: boolean;
   }): Promise<Message> {
-    return await this.callTelegramAPI('forwardMessages', params)
+    return await this.callTelegramAPI("forwardMessages", params);
   }
 }
