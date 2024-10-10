@@ -67,8 +67,7 @@ export class Bot {
       (updates) => {
         let update_id;
         for (const update of updates) {
-          if (!update_id) update_id = update.update_id;
-          else if (update.update_id > update_id) update_id = update.update_id;
+          if (!update_id || update.update_id > update_id) update_id = update.update_id;
           this.handlers.forEach((handler) => handler(update, this));
         }
         if (params) params.offset = update_id ? update_id + 1 : undefined;
