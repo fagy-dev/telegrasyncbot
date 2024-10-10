@@ -1,3 +1,4 @@
+import { InputFile } from "./types/InputFile.ts";
 import {
   Message,
   MessageEntity,
@@ -24,21 +25,25 @@ export class Bot {
     };
 
     if (params) {
-      const formData = new FormData()
+      const formData = new FormData();
 
       for (const [name, value] of Object.entries(params)) {
         if (typeof value === "string") {
-          formData.append(name, value)
+          formData.append(name, value);
           continue;
         }
         if (typeof value === "boolean" || typeof value === "number") {
-          formData.append(name, value.toString())
+          formData.append(name, value.toString());
           continue;
         }
-        formData.append(name, JSON.stringify(value))
+        if (value instanceof InputFile) {
+          formData.append(name, await value.getBlob());
+          continue;
+        }
+        formData.append(name, JSON.stringify(value));
       }
 
-      requestInit.body = formData
+      requestInit.body = formData;
     }
 
     const response = await fetch(`${this.url}/${methodName}`, requestInit);
@@ -167,5 +172,25 @@ export class Bot {
     remove_caption?: boolean;
   }): Promise<MessageId[]> {
     return await this.callTelegramAPI("copyMessages", params);
+  }
+
+  public async sendPhoto(params: {
+    business_connection_id?: string;
+    chat_id: number | string;
+    message_thread_id?: number;
+    photo: InputFile;
+    caption?: string;
+    parse_mode?: ParseMode;
+    caption_entities?: MessageEntity[];
+    show_caption_above_media?: boolean;
+    has_spoiler?: boolean;
+    disable_notification?: boolean;
+    protect_content?: boolean;
+    message_effect_id?: string;
+    reply_parameters?: any; /*ReplyParameters*/
+    reply_markup?:
+      any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
+  }): Promise<Message> {
+    return await this.callTelegramAPI("sendPhoto", params);
   }
 }
