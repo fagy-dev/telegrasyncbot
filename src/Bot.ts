@@ -1,4 +1,4 @@
-import { Message, MessageEntity, ParseMode } from "./types/Message.ts";
+import { Message, MessageEntity, MessageId, ParseMode } from "./types/Message.ts";
 import { Update, UpdateType } from "./types/Update.ts";
 import { User } from "./types/User.ts";
 
@@ -132,5 +132,22 @@ export class Bot {
     protect_content?: boolean;
   }): Promise<Message> {
     return await this.callTelegramAPI("forwardMessages", params);
+  }
+
+  public async copyMessage(params: {
+    chat_id: number | string
+    message_thread_id?: number
+    from_chat_id: number | string
+    message_id: number
+    caption?: string
+    parse_mode?: ParseMode
+    caption_entities?: MessageEntity[]
+    show_caption_above_media?: boolean
+    disable_notification?: boolean
+    protect_content?: boolean
+    reply_parameters?: any /*ReplyParameters*/
+    reply_markup?: any /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
+  }): Promise<MessageId> {
+    return await this.callTelegramAPI('copyMessage', params)
   }
 }
