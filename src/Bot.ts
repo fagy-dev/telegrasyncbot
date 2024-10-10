@@ -24,21 +24,21 @@ export class Bot {
     };
 
     if (params) {
-      const urlParams: Record<string, string> = {};
+      const formData = new FormData()
 
-      for (const [key, value] of Object.entries(params)) {
+      for (const [name, value] of Object.entries(params)) {
         if (typeof value === "string") {
-          urlParams[key] = value;
+          formData.append(name, value)
           continue;
         }
         if (typeof value === "boolean" || typeof value === "number") {
-          urlParams[key] = value.toString();
+          formData.append(name, value.toString())
           continue;
         }
-        urlParams[key] = JSON.stringify(value);
+        formData.append(name, JSON.stringify(value))
       }
 
-      requestInit.body = new URLSearchParams(urlParams);
+      requestInit.body = formData
     }
 
     const response = await fetch(`${this.url}/${methodName}`, requestInit);
