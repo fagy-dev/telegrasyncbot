@@ -18,7 +18,7 @@ export class Bot {
 
   private async callTelegramAPI(
     methodName: string,
-    params?: Record<string, any>,
+    params?: Record<string, unknown>,
   ) {
     const requestInit: RequestInit = {
       method: "POST",

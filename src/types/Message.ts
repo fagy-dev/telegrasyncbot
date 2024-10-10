@@ -105,3 +105,30 @@ export type TextQuote = {
   position: number;
   is_manual?: true;
 };
+
+export type ExternalReplyInfo = {
+  origin: any; /*MessageOrigin*/
+  chat?: Chat;
+  message_id?: number;
+  link_preview_options?: any; /*LinkPreviewOptions*/
+  animation?: any; /*Animation*/
+  audio?: any; /*Audio*/
+  document?: any; /*Document*/
+  paid_media?: any; /*PaidMediaInfo*/
+  photo?: any[]; /*PhotoSize[]*/
+  sticker?: any; /*Sticker*/
+  story?: any; /*Story*/
+  video?: any; /*Video*/
+  video_note?: any; /*VideoNote*/
+  voice?: any; /*Voice*/
+  has_media_spoiler?: true;
+  contact?: any; /*Contact*/
+  dice?: any; /*Dice*/
+  game?: any; /*Game*/
+  giveaway?: any; /*Giveaway*/
+  giveaway_winners?: any; /*GiveawayWinners*/
+  invoice?: any; /*Invoice*/
+  location?: any; /*Location*/
+  poll?: any; /*Poll*/
+  venue?: any; /*Venue*/
+};
