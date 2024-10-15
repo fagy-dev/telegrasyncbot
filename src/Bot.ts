@@ -117,7 +117,7 @@ export class Bot {
     disable_notification?: boolean;
     protect_content?: boolean;
     message_effect_id?: string;
-    reply_parameters?: ReplyParameters
+    reply_parameters?: ReplyParameters;
     reply_markup?:
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }): Promise<Message> {
@@ -157,7 +157,7 @@ export class Bot {
     show_caption_above_media?: boolean;
     disable_notification?: boolean;
     protect_content?: boolean;
-    reply_parameters?: ReplyParameters
+    reply_parameters?: ReplyParameters;
     reply_markup?:
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }): Promise<MessageId> {
@@ -189,7 +189,7 @@ export class Bot {
     disable_notification?: boolean;
     protect_content?: boolean;
     message_effect_id?: string;
-    reply_parameters?: ReplyParameters
+    reply_parameters?: ReplyParameters;
     reply_markup?:
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }): Promise<Message> {
@@ -211,7 +211,7 @@ export class Bot {
     disable_notification?: boolean;
     protect_content?: boolean;
     message_effect_id?: string;
-    reply_parameters?: ReplyParameters
+    reply_parameters?: ReplyParameters;
     reply_markup?:
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }) {

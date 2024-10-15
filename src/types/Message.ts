@@ -13,7 +13,7 @@ export type Message = {
   date: number;
   business_connection_id?: string;
   chat: Chat;
-  forward_origin?: any; /* MessageOrigin*/
+  forward_origin?: MessageOrigin
   is_topic_message?: true;
   is_automatic_forward?: true;
   reply_to_message?: Message;
@@ -107,7 +107,7 @@ export type TextQuote = {
 };
 
 export type ExternalReplyInfo = {
-  origin: any; /*MessageOrigin*/
+  origin: MessageOrigin
   chat?: Chat;
   message_id?: number;
   link_preview_options?: any; /*LinkPreviewOptions*/
@@ -141,4 +141,37 @@ export type ReplyParameters = {
   quote_parse_mode?: ParseMode;
   quote_entities?: MessageEntity[];
   quote_position?: number;
+};
+
+export type MessageOrigin =
+  | MessageOriginUser
+  | MessageOriginHiddenUser
+  | MessageOriginChat
+  | MessageOriginChannel;
+
+export type MessageOriginUser = {
+  type: "user";
+  date: number;
+  sender_user: User;
+};
+
+export type MessageOriginHiddenUser = {
+  type: "hidden_user";
+  date: number;
+  sender_user_name: string;
+};
+
+export type MessageOriginChat = {
+  type: "chat";
+  date: number;
+  sender_chat: Chat;
+  author_signature?: string;
+};
+
+export type MessageOriginChannel = {
+  type: "channel";
+  date: number;
+  chat: Chat;
+  message_id: number;
+  author_signature?: string;
 };
