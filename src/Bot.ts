@@ -177,7 +177,7 @@ export class Bot {
     business_connection_id?: string;
     chat_id: number | string;
     message_thread_id?: number;
-    photo: InputFile;
+    photo: InputFile | string;
     caption?: string;
     parse_mode?: ParseMode;
     caption_entities?: MessageEntity[];
@@ -191,5 +191,27 @@ export class Bot {
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }): Promise<Message> {
     return await this.callTelegramAPI("sendPhoto", params);
+  }
+
+  public async sendAudio(params: {
+    business_connection_id?: string;
+    chat_id: number | string;
+    message_thread_id?: number;
+    audio: InputFile | string;
+    caption?: string;
+    parse_mode?: ParseMode;
+    caption_entities?: MessageEntity[]
+    duration?: number
+    performer: string
+    title?: string
+    thumbnail?: InputFile | string
+    disable_notification?: boolean
+    protect_content?: boolean
+    message_effect_id?: string
+    reply_parameters?: any; /*ReplyParameters*/
+    reply_markup?:
+      any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
+  }) {
+    return await this.callTelegramAPI('sendAudio', params)
   }
 }
