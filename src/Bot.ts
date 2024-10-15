@@ -4,6 +4,7 @@ import {
   MessageEntity,
   MessageId,
   ParseMode,
+  type ReplyParameters,
 } from "./types/Message.ts";
 import { Update, UpdateType } from "./types/Update.ts";
 import { User } from "./types/User.ts";
@@ -67,7 +68,9 @@ export class Bot {
       (updates) => {
         let update_id;
         for (const update of updates) {
-          if (!update_id || update.update_id > update_id) update_id = update.update_id;
+          if (!update_id || update.update_id > update_id) {
+            update_id = update.update_id;
+          }
           this.handlers.forEach((handler) => handler(update, this));
         }
         if (params) params.offset = update_id ? update_id + 1 : undefined;
@@ -114,7 +117,7 @@ export class Bot {
     disable_notification?: boolean;
     protect_content?: boolean;
     message_effect_id?: string;
-    reply_parameters?: any; /*ReplyParameters*/
+    reply_parameters?: ReplyParameters
     reply_markup?:
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }): Promise<Message> {
@@ -154,7 +157,7 @@ export class Bot {
     show_caption_above_media?: boolean;
     disable_notification?: boolean;
     protect_content?: boolean;
-    reply_parameters?: any; /*ReplyParameters*/
+    reply_parameters?: ReplyParameters
     reply_markup?:
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }): Promise<MessageId> {
@@ -186,7 +189,7 @@ export class Bot {
     disable_notification?: boolean;
     protect_content?: boolean;
     message_effect_id?: string;
-    reply_parameters?: any; /*ReplyParameters*/
+    reply_parameters?: ReplyParameters
     reply_markup?:
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }): Promise<Message> {
@@ -200,18 +203,18 @@ export class Bot {
     audio: InputFile | string;
     caption?: string;
     parse_mode?: ParseMode;
-    caption_entities?: MessageEntity[]
-    duration?: number
-    performer: string
-    title?: string
-    thumbnail?: InputFile | string
-    disable_notification?: boolean
-    protect_content?: boolean
-    message_effect_id?: string
-    reply_parameters?: any; /*ReplyParameters*/
+    caption_entities?: MessageEntity[];
+    duration?: number;
+    performer: string;
+    title?: string;
+    thumbnail?: InputFile | string;
+    disable_notification?: boolean;
+    protect_content?: boolean;
+    message_effect_id?: string;
+    reply_parameters?: ReplyParameters
     reply_markup?:
       any; /*InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply*/
   }) {
-    return await this.callTelegramAPI('sendAudio', params)
+    return await this.callTelegramAPI("sendAudio", params);
   }
 }
